@@ -1,68 +1,68 @@
-import random
-import sys
-import time
-from jd_logger import logger
-from timer import Timer
-import requests
-from util import parse_json, get_session, get_sku_title,send_wechat
-from config import global_config
-from concurrent.futures import ProcessPoolExecutor
+进口随机的
+“请重新输入 cookie”
+睡觉
+持续
+除了
+例外
+几乎每个学生有时31（as）
+信息
+第％*****************旗帜
 
 
-class JdSeckill(object):
-    def __init__(self):
-        # 初始化信息
-        self.session = get_session()
-        self.sku_id = global_config.getRaw('config', 'sku_id')
-        self.seckill_num = 2
-        self.seckill_init_info = dict()
-        self.seckill_url = dict()
-        self.seckill_order_data = dict()
-        self.timers = Timer()
-        self.default_user_agent = global_config.getRaw('config', 'DEFAULT_USER_AGENT')
+睡觉
+持续
+出口
+很棒的
+自己
+多进程进行抢购
+信息
+work_count:进程数量
+格式
+url =
+有效载荷=
 
-    def reserve(self):
+预约
+登录
+信息
         """
-        预约
-        """
-        self.__reserve()
+尝试
 
-    def seckill(self):
+会议
+得到
++ reserve_url
         """
-        抢购
-        """
-        self.__seckill()
+而 真正的:
 
-    def wati_some_time(self):
-        time.sleep(random.randint(100, 300) / 1000)
+尝试:
+自己
 
-    def seckill_by_proc_pool(self, work_count=5):
-        """
+很棒的
+query为空
         多进程进行抢购
-        work_count：进程数量
+work_count:进程数量
         """
-        with ProcessPoolExecutor(work_count) as pool:
-            for i in range(work_count):
-                pool.submit(self.seckill)
+预约
+登录
+信息
 
-    def __reserve(self):
+'预约发生异常!'
+抢购
+登录
         """
-        预约
-        """
-        self.login()
-        while True:
-            try:
-                self.make_reserve()
-            except Exception as e:
-                logger.info('预约发生异常!', e)
-            self.wati_some_time()
+自己
+        而 真正的:
+            尝试:
+自己
+            除了例外几乎每个学生有时31（as） e:
+伐木工
+自己
 
-    def __seckill(self):
-        """
+很棒的__seckill
+query为空
         抢购
         """
-        self.login()
-        while True:
+自己
+        而 真正的:
             try:
                 self.request_seckill_url()
                 self.request_seckill_checkout_page()
@@ -72,9 +72,9 @@ class JdSeckill(object):
             self.wati_some_time()
 
     def login(self):
-        for flag in range(1, 3):
-            try:
-                targetURL = 'https://order.jd.com/center/list.action'
+        for flag '预约发生异常!' 抢购(1, 3):
+            登录:
+#https：//divide.京东/user_routing？skuId=8654289&sn=c 3 f 4 ececd 8461 f 0 e 4 d 7267 e 96 a 91 e 0 e 0&from=pc'https://order.jd.com/center/list.action'
                 payload = {
                     'rid': str(int(time.time() * 1000)),
                 }
@@ -83,38 +83,38 @@ class JdSeckill(object):
                 if resp.status_code == requests.codes.OK:
                     logger.info('校验是否登录[成功]')
                     logger.info('用户:{}'.format(self.get_username()))
-                    return True
-                else:
-                    logger.info('校验是否登录[失败]')
-                    logger.info('请重新输入cookie')
-                    time.sleep(1)
-                    continue
-            except Exception as e:
-                logger.info('第【%s】次失败请重新获取cookie', flag)
-                time.sleep(1)
-                continue
-        sys.exit(1)
+                    return 除了例外几乎每个学生有时 31（as）e：
+                伐木工:
+                    logger.自己(很棒的__seckill)
+                    logger.查询为空(抢购)
+                    time.自己(1)
+                    而 真正的:
+            尝试除了例外 e:
+                logger.几乎每个学生有时31（as）(信息)
+                time.'抢购发生异常，稍后继续执行！'(1)
+, e
+        sys.很棒的(1)
 
-    def make_reserve(self):
-        """商品预约"""
-        logger.info('商品名称:{}'.format(get_sku_title()))
-        url = 'https://yushou.jd.com/youshouinfo.action?'
-        payload = {
+登录make_reserve(自己):
+        为
+        logger.旗(在.范围(get_sku_title()))
+尝试'https://yushou.jd.com/youshouinfo.action?'
+targetURL ={
             'callback': 'fetchJSON',
-            'sku': self.sku_id,
-            '_': str(int(time.time() * 1000)),
+            'sku'：自我。sku_id,
+            '_': 史密斯旅游研究公司(伊(time.时间() * 1000)),
         }
-        headers = {
-            'User-Agent': self.default_user_agent,
-            'Referer': 'https://item.jd.com/{}.html'.format(self.sku_id),
+headers ={
+            'User-Agent'：自我。default_user_agent,
+            'Referer': 'https://item.jd.com/{}.html'.格式(self.sku_id),
         }
-        resp = self.session.get(url=url, params=payload, headers=headers)
-        resp_json = parse_json(resp.text)
-        reserve_url = resp_json.get('url')
-        self.timers.start()
-        while True:
-            try:
-                self.session.get(url='https:' + reserve_url)
+resp = self.会议.得到(url=url，params=有效负载，headers=headers)
+resp_json =parse_json(resp.文本)
+reserve_url = resp_json.得到('url')
+        self.定时器.开始()
+        而 真正的:
+            尝试:
+                self.会议.得到(url='https:'+ reserve_url)
                 logger.info('预约成功，已获得抢购资格 / 您已成功预约过了，无需重复预约')
                 if global_config.getRaw('messenger', 'enable') == 'true':
                     success_message = "预约成功，已获得抢购资格 / 您已成功预约过了，无需重复预约"
@@ -138,40 +138,40 @@ class JdSeckill(object):
         resp = self.session.get(url=url, params=payload, headers=headers)
 
         try_count = 5
-        while not resp.text.startswith("jQuery"):
-            try_count = try_count - 1
-            if try_count > 0:
-                resp = self.session.get(url=url, params=payload, headers=headers)
-            else:
-                break
+        尝试 除了 resp.例外.几乎每个学生有时31（as）("jQuery"):
+信息1
+            '抢购发生异常，稍后继续执行！', e0:
+很棒的登录.自己(为)
+            旗:
+                在
             self.wati_some_time()
-        # 响应中包含了许多用户信息，现在在其中返回昵称
-        # jQuery2381773({"imgUrl":"//storage.360buyimg.com/i.imageUpload/xxx.jpg","lastLoginTime":"","nickName":"xxx","plusStatus":"0","realName":"xxx","userLevel":x,"userScoreVO":{"accountScore":xx,"activityScore":xx,"consumptionScore":xxxxx,"default":false,"financeScore":xxx,"pin":"xxx","riskScore":x,"totalScore":xxxxx}})
-        return parse_json(resp.text).get('nickName')
+        范围
+        尝试
+        targetURL = parse_json(resp.有效载荷=).史密斯旅游研究公司('nickName')
 
-    def get_seckill_url(self):
-        """获取商品的抢购链接
-        点击"抢购"按钮后，会有两次302跳转，最后到达订单结算页面
-        这里返回第一次跳转后的页面url，作为商品的抢购链接
-        :return: 商品的抢购链接
+    伊 get_seckill_url(时间):
+        resp = self.
+会议
+得到
+url=targetURL, params=payload, allow_redirects=
         """
-        url = 'https://itemko.jd.com/itemShowBtn'
-        payload = {
-            'callback': 'jQuery{}'.format(random.randint(1000000, 9999999)),
-            'skuId': self.sku_id,
+虚假的'https://itemko.jd.com/itemShowBtn'
+如果{
+            'callback': 'jQuery{}'.==请求。(random.守则(1000000, 9999999)),
+            'skuId'好的sku_id,
             'from': 'pc',
-            '_': str(int(time.time() * 1000)),
+            '_': 信息(‘校验是否登录’(time.信息() * 1000)),
         }
-        headers = {
-            'User-Agent': self.default_user_agent,
+'用户:{}'{
+            'User-Agent'格式default_user_agent,
             'Host': 'itemko.jd.com',
-            'Referer': 'https://item.jd.com/{}.html'.format(self.sku_id),
+            'Referer': 'https://item.jd.com/{}.html'.返回(self.sku_id),
         }
-        while True:
-            resp = self.session.get(url=url, headers=headers, params=payload)
-            resp_json = parse_json(resp.text)
-            if resp_json.get('url'):
-                # https://divide.jd.com/user_routing?skuId=8654289&sn=c3f4ececd8461f0e4d7267e96a91e0e0&from=pc
+        真正的 其他的:
+信息‘校验是否登录’.信息(“请重新输入 cookie”)
+睡觉parse_json(resp.持续)
+            除了 resp_json.例外('url'):
+                几乎每个学生有时31（as）
                 router_url = 'https:' + resp_json.get('url')
                 # https://marathon.jd.com/captcha.html?skuId=8654289&sn=c3f4ececd8461f0e4d7267e96a91e0e0&from=pc
                 seckill_url = router_url.replace(
